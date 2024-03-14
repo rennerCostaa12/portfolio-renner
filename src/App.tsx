@@ -45,6 +45,7 @@ import pathUser from "../src/assets/profile-2.png";
 import pathBannerContact from "../src/assets/banner-contact.jpg";
 import pathImgProjectLdPageBank from "../src/assets/project-landing-page-bank.png";
 import pathImgProjectLdPageFylo from "../src/assets/project-landing-page-fylo.png";
+import pathImgProjectLdPageRoom from "../src/assets/project-room-homepage.png";
 
 import { Typewriter } from "./components/TypeWriter";
 
@@ -244,7 +245,10 @@ export const App = () => {
 
           <ContentProject>
             <ContentImgProject>
-              <img src={pathImgProjectLdPageBank} alt="project-thumb" />
+              <img
+                src={pathImgProjectLdPageBank}
+                alt="project-thumb-easybank"
+              />
             </ContentImgProject>
 
             <ContentInformationsProject>
@@ -267,7 +271,7 @@ export const App = () => {
 
           <ContentProject>
             <ContentImgProject>
-              <img src={pathImgProjectLdPageFylo} alt="project-thumb" />
+              <img src={pathImgProjectLdPageFylo} alt="project-thumb-fylo" />
             </ContentImgProject>
 
             <ContentInformationsProject>
@@ -279,6 +283,32 @@ export const App = () => {
                   onClick={() =>
                     handleRedirectPage(
                       "https://landing-page-fylo-dqa5.vercel.app/"
+                    )
+                  }
+                >
+                  Visitar Site
+                </Button>
+              </ContentBtnViewMoreProject>
+            </ContentInformationsProject>
+          </ContentProject>
+
+          <ContentProject>
+            <ContentImgProject>
+              <img
+                src={pathImgProjectLdPageRoom}
+                alt="project-thumb-romm-homepage"
+              />
+            </ContentImgProject>
+
+            <ContentInformationsProject>
+              <TitleProject>Room Homepage</TitleProject>
+              <ContentBtnViewMoreProject>
+                <Button
+                  backgroundButton={theme.primary}
+                  colorText={theme.color_white}
+                  onClick={() =>
+                    handleRedirectPage(
+                      "https://room-homepage-lemon.vercel.app/"
                     )
                   }
                 >
