@@ -46,6 +46,7 @@ import pathBannerContact from "../src/assets/banner-contact.jpg";
 import pathImgProjectLdPageBank from "../src/assets/project-landing-page-bank.png";
 import pathImgProjectLdPageFylo from "../src/assets/project-landing-page-fylo.png";
 import pathImgProjectLdPageRoom from "../src/assets/project-room-homepage.png";
+import pathImgProjectIpAddressTracker from "../src/assets/project-ip-address.png";
 
 import { Typewriter } from "./components/TypeWriter";
 
@@ -317,6 +318,32 @@ export const App = () => {
               </ContentBtnViewMoreProject>
             </ContentInformationsProject>
           </ContentProject>
+
+          <ContentProject>
+            <ContentImgProject>
+              <img
+                src={pathImgProjectIpAddressTracker}
+                alt="project-thumb-ip-address-tracker"
+              />
+            </ContentImgProject>
+
+            <ContentInformationsProject>
+              <TitleProject>IP Address Tracker</TitleProject>
+              <ContentBtnViewMoreProject>
+                <Button
+                  backgroundButton={theme.primary}
+                  colorText={theme.color_white}
+                  onClick={() =>
+                    handleRedirectPage(
+                      "https://ip-address-tracker-gray-six.vercel.app/"
+                    )
+                  }
+                >
+                  Visitar Site
+                </Button>
+              </ContentBtnViewMoreProject>
+            </ContentInformationsProject>
+          </ContentProject>
         </SectionProjects>
       </Section>
 
@@ -327,7 +354,7 @@ export const App = () => {
           </BannerContactMe>
 
           <ContactMeForm onSubmit={handleSendEmail} ref={refFormContact}>
-            <h2>Entre em contato hoje mesmo para agendar sua ligação</h2>
+            <h2>Preencha o formulário para entrar em contato comigo</h2>
 
             <ContentInformationsContact>
               <div>

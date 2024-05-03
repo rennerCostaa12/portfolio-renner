@@ -4,7 +4,6 @@ import { FaGithub } from "react-icons/fa";
 import {
   Container,
   Content,
-  TextFollow,
   ContentSocialMedia,
   NameDev,
 } from "./styles";
@@ -13,7 +12,6 @@ export const Footer = () => {
   return (
     <Container>
       <Content>
-        <TextFollow>ME SIGAM:</TextFollow>
         <ContentSocialMedia>
           <div>
             <a
