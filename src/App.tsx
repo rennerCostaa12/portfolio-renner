@@ -134,6 +134,9 @@ export const App = () => {
               <Button
                 backgroundButton={theme.primary}
                 colorText={theme.color_white}
+                onClick={() => {
+                  window.location.href = `${window.location.origin}/#contato`
+                }}
               >
                 ENTRE EM CONTATO
               </Button>
