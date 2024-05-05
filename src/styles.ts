@@ -165,6 +165,11 @@ export const ContentImgProject = styled.div`
     padding: 0.5rem;
     border-radius: 5px;
   }
+
+  @media (max-width: 768px){
+    height: 100%;
+    max-height: 300px;
+  }
 `;
 
 export const ContentInformationsProject = styled.div``;
