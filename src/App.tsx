@@ -1,11 +1,13 @@
 import { ToastContainer, toast } from "react-toastify";
-import { FormEvent, useRef, useState } from "react";
-import "react-toastify/dist/ReactToastify.css";
-
+import * as yup from "yup";
 import emailjs from "@emailjs/browser";
-
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { MdEmail } from "react-icons/md";
 import { FaPhoneAlt } from "react-icons/fa";
+
+import { useState } from "react";
+import "react-toastify/dist/ReactToastify.css";
 
 import { Header } from "./components/Header";
 import { Section } from "./components/Section";
@@ -50,17 +52,28 @@ import pathImgProjectIpAddressTracker from "../src/assets/project-ip-address.png
 
 import { Typewriter } from "./components/TypeWriter";
 
+const SchemaFormContactMe = yup
+  .object({
+    full_name: yup.string().required("Campo obrigatório"),
+    message: yup.string().required("Campo obrigatório"),
+  })
+  .required();
+
+type SchemaFormContactMeProps = yup.InferType<typeof SchemaFormContactMe>;
+
 export const App = () => {
+  const {
+    resetField,
+    formState: { errors },
+    handleSubmit,
+    control
+  } = useForm<SchemaFormContactMeProps>({
+    resolver: yupResolver(SchemaFormContactMe),
+  });
+
   const [loading, setLoading] = useState<boolean>(false);
 
-  const refFormContact = useRef<any>(null);
-  const refInputFullName = useRef<HTMLInputElement | undefined>(undefined);
-  const refInputEmail = useRef<HTMLInputElement | undefined>(undefined);
-  const refInputMessage = useRef<HTMLInputElement | undefined>(undefined);
-
-  const handleSendEmail = async (event: FormEvent) => {
-    event.preventDefault();
-
+  const handleSendEmail = async (event: SchemaFormContactMeProps) => {
     try {
       setLoading(true);
 
@@ -69,8 +82,8 @@ export const App = () => {
         import.meta.env.VITE_EMAIL_TEMPLATE_ID,
         {
           to_name: "Renner",
-          from_name: refInputFullName.current?.value,
-          message: refInputMessage.current?.value,
+          from_name: event.full_name,
+          message: event.message,
         },
         import.meta.env.VITE_EMAIL_PUBLIC_KEY
       );
@@ -79,19 +92,9 @@ export const App = () => {
         position: "top-right",
       });
 
-      if (refInputFullName.current) {
-        refInputFullName.current.value = "";
-      }
-
-      if (refInputEmail.current) {
-        refInputEmail.current.value = "";
-      }
-
-      if (refInputMessage.current) {
-        refInputMessage.current.value = "";
-      }
+      resetField("full_name");
+      resetField("message");
     } catch (error) {
-      console.error(error);
       toast.error("Erro ao enviar email!", {
         position: "top-right",
       });
@@ -353,7 +356,7 @@ export const App = () => {
             <img src={pathBannerContact} alt="banner-with-phone" />
           </BannerContactMe>
 
-          <ContactMeForm onSubmit={handleSendEmail} ref={refFormContact}>
+          <ContactMeForm onSubmit={handleSubmit(handleSendEmail)}>
             <h2>Preencha o formulário para entrar em contato comigo</h2>
 
             <ContentInformationsContact>
@@ -372,20 +375,39 @@ export const App = () => {
             </ContentInformationsContact>
 
             <div>
-              <ContentInput>
-                <Input
-                  label="Nome completo"
-                  type="text"
-                  refInput={refInputFullName}
-                />
-              </ContentInput>
-              <ContentInput>
-                <Input
-                  label="Mensagem"
-                  type="text"
-                  refInput={refInputMessage}
-                />
-              </ContentInput>
+              <Controller
+                control={control}
+                name="full_name"
+                render={({ field: { onChange, value = "" } }) => (
+                  <ContentInput>
+                  <Input
+                    label="Nome completo"
+                    type="text"
+                    error={Boolean(errors.full_name?.message)}
+                    textError={errors.full_name?.message}
+                    onChange={onChange}
+                    value={value}
+                  />
+                </ContentInput>
+                )}
+              />
+
+              <Controller
+                control={control}
+                name="message"
+                render={({ field: { onChange, value = "" } }) => (
+                  <ContentInput>
+                    <Input
+                      label="Mensagem"
+                      type="text"
+                      error={Boolean(errors.message?.message)}
+                      textError={errors.message?.message}
+                      onChange={onChange}
+                      value={value}
+                    />
+                  </ContentInput>
+                )}
+              />
             </div>
 
             <ContentButtonSendEmail>

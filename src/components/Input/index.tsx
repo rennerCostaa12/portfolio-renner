@@ -1,17 +1,24 @@
-import { InputHTMLAttributes, MutableRefObject } from "react";
+import { InputHTMLAttributes } from "react";
 
-import { Input as InputStyle, Container, Label } from "./styles";
+import { Input as InputStyle, Container, Label, MessageError } from "./styles";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  refInput?: MutableRefObject<HTMLInputElement | undefined>;
+  error?: boolean;
+  textError?: string;
 }
 
-export const Input = ({ label, refInput, ...props }: InputProps) => {
+export const Input = ({
+  label,
+  error,
+  textError,
+  ...props
+}: InputProps) => {
   return (
     <Container>
       <Label>{label}</Label>
-      <InputStyle type="text" {...props} ref={refInput as any} />
+      <InputStyle type="text" {...props} error={error} />
+      {textError && <MessageError>{textError}</MessageError>}
     </Container>
   );
 };

@@ -15,9 +15,9 @@ export const Label = styled.label`
   }
 `;
 
-export const Input = styled.input`
+export const Input = styled.input<{ error?: boolean }>`
   border: none;
-  border-bottom: 1px solid ${theme.color_black};
+  border-bottom: 1px solid ${({ error }) => error ? theme.red_crimson : theme.color_black};
   outline: none;
   font-size: 14px;
   background: none;
@@ -25,4 +25,12 @@ export const Input = styled.input`
   @media (max-width: 425px) {
     font-size: 12px;
   }
+`;
+
+export const MessageError = styled.span`
+  display: block;
+  margin: 1rem 0;
+  color: ${theme.red_crimson};
+  font-size: 14px;
+  font-style: italic;
 `;
