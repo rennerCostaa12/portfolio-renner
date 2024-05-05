@@ -42,6 +42,7 @@ import {
 } from "./styles";
 import { GlobalStyles } from "./GlobalStyles";
 import { theme } from "./theme/colors";
+import { names_icons_skills } from "./utils/constants";
 
 import pathUser from "../src/assets/profile-2.png";
 import pathBannerContact from "../src/assets/banner-contact.jpg";
@@ -66,7 +67,7 @@ export const App = () => {
     resetField,
     formState: { errors },
     handleSubmit,
-    control
+    control,
   } = useForm<SchemaFormContactMeProps>({
     resolver: yupResolver(SchemaFormContactMe),
   });
@@ -150,93 +151,13 @@ export const App = () => {
             <TitleSection>Habilidades</TitleSection>
           </ContentTitleSection>
           <ContentIconSkills>
-            <ContentCardSkills>
-              <i className="devicon-html5-plain-wordmark colored"></i>
-            </ContentCardSkills>
-
-            <ContentCardSkills>
-              <i className="devicon-css3-plain-wordmark colored"></i>
-            </ContentCardSkills>
-
-            <ContentCardSkills>
-              <i className="devicon-javascript-plain colored"></i>
-            </ContentCardSkills>
-
-            <ContentCardSkills>
-              <i className="devicon-typescript-plain colored"></i>
-            </ContentCardSkills>
-
-            <ContentCardSkills>
-              <i className="devicon-nextjs-original-wordmark colored"></i>
-            </ContentCardSkills>
-
-            <ContentCardSkills>
-              <i className="devicon-react-original-wordmark colored"></i>
-            </ContentCardSkills>
-
-            <ContentCardSkills>
-              <i className="devicon-redux-original colored"></i>
-            </ContentCardSkills>
-
-            <ContentCardSkills>
-              <i className="devicon-bootstrap-plain-wordmark colored"></i>
-            </ContentCardSkills>
-
-            <ContentCardSkills>
-              <i className="devicon-materialui-plain colored"></i>
-            </ContentCardSkills>
-
-            <ContentCardSkills>
-              <i className="devicon-tailwindcss-original-wordmark colored"></i>
-            </ContentCardSkills>
-
-            <ContentCardSkills>
-              <i className="devicon-docker-plain-wordmark colored"></i>
-            </ContentCardSkills>
-
-            <ContentCardSkills>
-              <i className="devicon-laravel-plain-wordmark colored"></i>
-            </ContentCardSkills>
-
-            <ContentCardSkills>
-              <i className="devicon-cakephp-plain-wordmark colored"></i>
-            </ContentCardSkills>
-
-            <ContentCardSkills>
-              <i className="devicon-nestjs-plain-wordmark colored"></i>
-            </ContentCardSkills>
-
-            <ContentCardSkills>
-              <i className="devicon-nodejs-plain-wordmark colored"></i>
-            </ContentCardSkills>
-
-            <ContentCardSkills>
-              <i className="devicon-git-plain-wordmark colored"></i>
-            </ContentCardSkills>
-
-            <ContentCardSkills>
-              <i className="devicon-github-original-wordmark colored"></i>
-            </ContentCardSkills>
-
-            <ContentCardSkills>
-              <i className="devicon-gitlab-plain-wordmark colored"></i>
-            </ContentCardSkills>
-
-            <ContentCardSkills>
-              <i className="devicon-ubuntu-plain-wordmark colored"></i>
-            </ContentCardSkills>
-
-            <ContentCardSkills>
-              <i className="devicon-mysql-plain-wordmark colored"></i>
-            </ContentCardSkills>
-
-            <ContentCardSkills>
-              <i className="devicon-postgresql-plain-wordmark colored"></i>
-            </ContentCardSkills>
-
-            <ContentCardSkills>
-              <i className="devicon-npm-original-wordmark colored"></i>
-            </ContentCardSkills>
+            {names_icons_skills.map((value, index) => {
+              return (
+                <ContentCardSkills key={index}>
+                  <i className={value}></i>
+                </ContentCardSkills>
+              );
+            })}
           </ContentIconSkills>
         </SectionSkills>
       </Section>
@@ -380,15 +301,15 @@ export const App = () => {
                 name="full_name"
                 render={({ field: { onChange, value = "" } }) => (
                   <ContentInput>
-                  <Input
-                    label="Nome completo"
-                    type="text"
-                    error={Boolean(errors.full_name?.message)}
-                    textError={errors.full_name?.message}
-                    onChange={onChange}
-                    value={value}
-                  />
-                </ContentInput>
+                    <Input
+                      label="Nome completo"
+                      type="text"
+                      error={Boolean(errors.full_name?.message)}
+                      textError={errors.full_name?.message}
+                      onChange={onChange}
+                      value={value}
+                    />
+                  </ContentInput>
                 )}
               />
 
